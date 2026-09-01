@@ -15,6 +15,8 @@ export default function AdminDashboardPage() {
   const [demoLink, setDemoLink] = useState("");
   const [githubLink, setGithubLink] = useState("");
   const [isPublished, setIsPublished] = useState(false);
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
 
   function slugify(text: string) {
@@ -27,7 +29,34 @@ export default function AdminDashboardPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setStatus(null);
+    setStatus("Menyimpan...");
+    setIsUploading(true);
+
+    let cover_url = "";
+
+    if (coverFile) {
+      const fileExt = coverFile.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from("project-covers")
+        .upload(fileName, coverFile);
+
+      if (uploadError) {
+        setStatus(`Gagal upload cover: ${uploadError.message}`);
+        setIsUploading(false);
+        return;
+      }
+
+      const { data: publicUrlData } = supabase.storage
+        .from("project-covers")
+        .getPublicUrl(fileName);
+        
+      cover_url = publicUrlData.publicUrl;
+    } else {
+      setStatus("Error: Cover image wajib diisi!");
+      setIsUploading(false);
+      return;
+    }
 
     const { error } = await supabase.from("projects").insert({
       title,
@@ -39,10 +68,15 @@ export default function AdminDashboardPage() {
       rating: rating === "" ? null : rating,
       links: { demo: demoLink || undefined, github: githubLink || undefined },
       is_published: isPublished,
-      cover_url: "", // TODO: upload ke bucket project-covers, isi URL hasil upload
+      cover_url,
     });
 
     setStatus(error ? `Error: ${error.message}` : "Project tersimpan.");
+    setIsUploading(false);
+    if (!error) {
+      // Reset form if success
+      setTitle(""); setDescription(""); setTechStack(""); setDemoLink(""); setGithubLink(""); setCoverFile(null);
+    }
   }
 
   return (
@@ -119,15 +153,25 @@ export default function AdminDashboardPage() {
           Publish sekarang
         </label>
 
-        {/* TODO: input upload cover_url ke Supabase Storage bucket project-covers */}
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium">Cover Image</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setCoverFile(e.target.files?.[0] || null)}
+            className="rounded border border-text-muted/30 bg-elevated px-3 py-2 text-sm"
+            required
+          />
+        </div>
 
         {status && <p className="text-sm text-text-muted">{status}</p>}
 
         <button
           type="submit"
-          className="rounded bg-accent-orange px-4 py-2 font-medium text-base"
+          disabled={isUploading}
+          className="rounded bg-accent-orange px-4 py-2 font-medium text-base disabled:opacity-50"
         >
-          Simpan
+          {isUploading ? "Menyimpan..." : "Simpan"}
         </button>
       </form>
     </main>
