@@ -32,9 +32,6 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
                 className="h-full w-full object-cover"
               />
             </div>
-            <div className="mt-4 flex justify-center">
-              <RatingDots rating={project.rating} />
-            </div>
           </div>
 
           {/* Details Container */}
@@ -60,9 +57,27 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
               </span>
             </div>
 
-            <p className="mt-8 max-w-3xl text-lg leading-relaxed text-text-primary/90">
-              {project.description}
-            </p>
+            {/* Letterboxd Review Block */}
+            <div className="mt-8 rounded-lg border border-white/5 bg-elevated/40 p-6 shadow-inner">
+              <div className="mb-4 flex items-center gap-3 border-b border-white/5 pb-4">
+                <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-gradient-to-tr from-accent-orange to-accent-green">
+                  <span className="flex h-full w-full items-center justify-center font-display text-sm font-bold text-base">
+                    A
+                  </span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-text-muted">
+                    Review by <strong className="text-text-primary">Agadape</strong>
+                  </p>
+                  <div className="mt-0.5">
+                    <RatingDots rating={project.rating} />
+                  </div>
+                </div>
+              </div>
+              <p className="whitespace-pre-line text-base leading-relaxed text-text-primary/90">
+                {project.description}
+              </p>
+            </div>
 
             <div className="mt-10 flex gap-4">
               {project.links?.demo && (

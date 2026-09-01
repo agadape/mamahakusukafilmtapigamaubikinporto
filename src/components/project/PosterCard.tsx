@@ -57,7 +57,7 @@ export function PosterCard({ project }: PosterCardProps) {
           rotateX: reducedMotion ? 0 : rotateX,
           rotateY: reducedMotion ? 0 : rotateY,
         }}
-        className="group relative aspect-poster w-full overflow-hidden rounded-poster bg-elevated"
+        className="group relative aspect-poster w-full overflow-hidden rounded-poster bg-elevated ring-1 ring-white/10 transition-all hover:ring-2 hover:ring-accent-green hover:ring-offset-4 hover:ring-offset-base"
       >
         <motion.img
           src={project.cover_url}

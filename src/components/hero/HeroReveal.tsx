@@ -24,6 +24,24 @@ export function HeroReveal({ name, tagline }: HeroRevealProps) {
         animate="visible"
         className="relative z-10 mx-auto max-w-4xl"
       >
+        <div className="mb-6 flex items-center gap-6">
+          <motion.div variants={heroWordVariant} className="h-20 w-20 shrink-0 overflow-hidden rounded-full bg-gradient-to-tr from-accent-orange via-accent-green to-accent-blue p-1 shadow-lg">
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-base text-2xl font-bold text-text-primary">
+              A
+            </div>
+          </motion.div>
+          <motion.div variants={heroWordVariant} className="flex gap-4 sm:gap-8">
+            <div className="text-center">
+              <span className="block font-display text-2xl font-bold text-text-primary">14</span>
+              <span className="text-xs uppercase tracking-wider text-text-muted">Projects</span>
+            </div>
+            <div className="text-center">
+              <span className="block font-display text-2xl font-bold text-text-primary">5</span>
+              <span className="text-xs uppercase tracking-wider text-text-muted">Hackathons</span>
+            </div>
+          </motion.div>
+        </div>
+
         <h1 className="font-display flex flex-wrap gap-x-4 text-5xl font-bold sm:text-7xl">
           {nameWords.map((word, i) => (
             <motion.span key={i} variants={heroWordVariant} className="inline-block">
@@ -42,7 +60,7 @@ export function HeroReveal({ name, tagline }: HeroRevealProps) {
           href="#projects"
           className="mt-8 inline-block rounded-full border border-accent-orange px-6 py-2.5 text-sm font-medium text-accent-orange transition-colors hover:bg-accent-orange hover:text-base"
         >
-          Lihat Project
+          Lihat Diary Project
         </motion.a>
       </motion.div>
     </section>
