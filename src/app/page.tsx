@@ -1,11 +1,13 @@
 import { HeroReveal } from "@/components/hero/HeroReveal";
 import { ProjectGrid } from "@/components/project/ProjectGrid";
 import { FilmStripDivider } from "@/components/layout/FilmStripDivider";
-import { dummyProjects } from "@/lib/data/dummyProjects";
-// Setelah Supabase disambung (TECHSPEC §8 step 5), ganti dummyProjects
-// dengan: const projects = await getProjects();
+import { getProjects } from "@/lib/supabase/queries";
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const projects = await getProjects();
+
   return (
     <main>
       <HeroReveal
@@ -14,7 +16,7 @@ export default function HomePage() {
       />
       <FilmStripDivider />
       <div id="projects">
-        <ProjectGrid projects={dummyProjects} />
+        <ProjectGrid projects={projects} />
       </div>
     </main>
   );

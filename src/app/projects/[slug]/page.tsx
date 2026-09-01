@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
-import { dummyProjects } from "@/lib/data/dummyProjects";
+import { getProjectBySlug } from "@/lib/supabase/queries";
 import { RatingDots } from "@/components/project/RatingDots";
-// Setelah Supabase disambung: ganti pencarian di dummyProjects
-// dengan await getProjectBySlug(params.slug).
 
-export default function ProjectDetailPage({ params }: { params: { slug: string } }) {
-  const project = dummyProjects.find((p) => p.slug === params.slug);
+export const revalidate = 60;
+
+export default async function ProjectDetailPage({ params }: { params: { slug: string } }) {
+  const project = await getProjectBySlug(params.slug);
   if (!project) notFound();
 
   return (
