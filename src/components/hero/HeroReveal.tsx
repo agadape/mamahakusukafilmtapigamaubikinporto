@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 interface HeroRevealProps {
   name: string;
   tagline: string;
@@ -9,8 +11,10 @@ interface HeroRevealProps {
 
 export function HeroReveal({ name, tagline, projectCount, hackathonCount }: HeroRevealProps) {
   return (
-    <section className="w-full pt-16 pb-8 px-4">
-      <div className="mx-auto max-w-5xl">
+    <section className="relative w-full pt-16 pb-8 px-4 overflow-hidden">
+      <HeroBackgroundDots />
+      
+      <div className="relative z-10 mx-auto max-w-5xl">
         {/* Header Flex */}
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
           
@@ -77,5 +81,46 @@ export function HeroReveal({ name, tagline, projectCount, hackathonCount }: Hero
         </div>
       </div>
     </section>
+  );
+}
+
+// Dots melayang perlahan, 3 warna aksen — dimatikan otomatis via CSS reduced-motion (globals.css)
+function HeroBackgroundDots() {
+  const colors = ["var(--accent-orange)", "var(--accent-green)", "var(--accent-blue)"];
+  const dots = Array.from({ length: 18 });
+
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {dots.map((_, i) => {
+        const color = colors[i % colors.length];
+        const size = 4 + (i % 3) * 2;
+        const left = (i * 37) % 100;
+        const top = (i * 53) % 100;
+        const duration = 6 + (i % 5);
+
+        return (
+          <motion.span
+            key={i}
+            className="absolute rounded-full opacity-40"
+            style={{
+              backgroundColor: color,
+              width: size,
+              height: size,
+              left: `${left}%`,
+              top: `${top}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              x: [0, 10, 0],
+            }}
+            transition={{
+              duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        );
+      })}
+    </div>
   );
 }
