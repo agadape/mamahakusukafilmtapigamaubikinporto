@@ -1,10 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import {
-  heroContainerVariant,
-  heroWordVariant,
-} from "@/lib/animations/variants";
+"use client";
 
 interface HeroRevealProps {
   name: string;
@@ -14,57 +10,74 @@ interface HeroRevealProps {
 }
 
 export function HeroReveal({ name, tagline, projectCount, hackathonCount }: HeroRevealProps) {
-  const nameWords = name.split(" ");
-
   return (
-    <section className="relative flex min-h-[80vh] flex-col items-start justify-center overflow-hidden px-4">
-      <HeroBackgroundDots />
+    <section className="w-full pt-16 pb-8 px-4">
+      <div className="mx-auto max-w-5xl">
+        {/* Header Flex */}
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
+          
+          {/* Left: Avatar & Info */}
+          <div className="flex gap-4 sm:gap-6 items-start">
+            {/* Avatar */}
+            <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border border-white/10 shrink-0 bg-elevated shadow-lg">
+              <div className="w-full h-full bg-gradient-to-tr from-accent-orange via-accent-green to-accent-blue flex items-center justify-center text-3xl sm:text-4xl font-display font-bold text-white">
+                {name.charAt(0)}
+              </div>
+            </div>
 
-      <motion.div
-        variants={heroContainerVariant}
-        initial="hidden"
-        animate="visible"
-        className="relative z-10 mx-auto max-w-4xl"
-      >
-        <div className="mb-6 flex items-center gap-6">
-          <motion.div variants={heroWordVariant} className="h-20 w-20 shrink-0 overflow-hidden rounded-full bg-gradient-to-tr from-accent-orange via-accent-green to-accent-blue p-1 shadow-lg">
-            <div className="flex h-full w-full items-center justify-center rounded-full bg-base text-2xl font-bold text-text-primary">
-              A
+            {/* Info */}
+            <div className="flex flex-col pt-1">
+              <div className="flex items-center gap-3">
+                <h1 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">{name}</h1>
+                <button className="hidden sm:block px-3 py-1 text-[11px] font-semibold tracking-widest text-text-muted bg-white/10 rounded hover:bg-white/20 transition-colors uppercase">
+                  Edit Profile
+                </button>
+                <button className="hidden sm:flex items-center justify-center w-7 h-7 text-text-muted bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                  <span className="leading-none pb-2">...</span>
+                </button>
+              </div>
+              <p className="mt-1 text-sm sm:text-base text-text-muted/80">{tagline}</p>
+              <p className="mt-2 flex items-center gap-1 text-xs sm:text-sm text-text-muted/60">
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path>
+                </svg>
+                Indonesia
+              </p>
             </div>
-          </motion.div>
-          <motion.div variants={heroWordVariant} className="flex gap-4 sm:gap-8">
-            <div className="text-center">
-              <span className="block font-display text-2xl font-bold text-text-primary">{projectCount}</span>
-              <span className="text-xs uppercase tracking-wider text-text-muted">Projects</span>
+          </div>
+
+          {/* Right: Stats */}
+          <div className="flex items-center border-t md:border-t-0 border-white/5 pt-6 md:pt-2">
+            <div className="flex flex-col items-center px-3 sm:px-5">
+              <span className="font-display text-xl sm:text-2xl font-bold text-white">{projectCount}</span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted/60 tracking-wider">PROJECTS</span>
             </div>
-            <div className="text-center">
-              <span className="block font-display text-2xl font-bold text-text-primary">{hackathonCount}</span>
-              <span className="text-xs uppercase tracking-wider text-text-muted">Hackathons</span>
+            <div className="flex flex-col items-center px-3 sm:px-5 border-l border-white/10">
+              <span className="font-display text-xl sm:text-2xl font-bold text-white">{hackathonCount}</span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted/60 tracking-wider">HACKATHONS</span>
             </div>
-          </motion.div>
+            <div className="flex flex-col items-center px-3 sm:px-5 border-l border-white/10">
+              <span className="font-display text-xl sm:text-2xl font-bold text-white">{new Date().getFullYear()}</span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted/60 tracking-wider">THIS YEAR</span>
+            </div>
+            <div className="flex flex-col items-center pl-3 sm:pl-5 border-l border-white/10">
+              <span className="font-display text-xl sm:text-2xl font-bold text-white">0</span>
+              <span className="text-[9px] sm:text-[10px] text-text-muted/60 tracking-wider">FOLLOWERS</span>
+            </div>
+          </div>
+
         </div>
 
-        <h1 className="font-display flex flex-wrap gap-x-4 text-5xl font-bold sm:text-7xl">
-          {nameWords.map((word, i) => (
-            <motion.span key={i} variants={heroWordVariant} className="inline-block">
-              {word}
-            </motion.span>
-          ))}
-        </h1>
-        <motion.p
-          variants={heroWordVariant}
-          className="mt-4 max-w-lg text-lg text-text-muted"
-        >
-          {tagline}
-        </motion.p>
-        <motion.a
-          variants={heroWordVariant}
-          href="#projects"
-          className="mt-8 inline-block rounded-full border border-accent-orange px-6 py-2.5 text-sm font-medium text-accent-orange transition-colors hover:bg-accent-orange hover:text-base"
-        >
-          Lihat Diary Project
-        </motion.a>
-      </motion.div>
+        {/* Sub-nav Tabs (Letterboxd box menu) */}
+        <div className="mt-10 border border-white/10 rounded flex items-center px-2 sm:px-4 py-3 gap-4 sm:gap-6 text-sm text-text-muted overflow-x-auto no-scrollbar shadow-sm bg-base">
+          <a href="#" className="text-white border-b-2 border-accent-green pb-[11px] -mb-3 font-medium px-2">Profile</a>
+          <a href="#" className="hover:text-white transition-colors px-2">Activity</a>
+          <a href="#projects" className="hover:text-white transition-colors px-2">Projects</a>
+          <a href="/about" className="hover:text-white transition-colors px-2">Diary</a>
+          <a href="#" className="hover:text-white transition-colors px-2">Reviews</a>
+          <a href="#" className="hover:text-white transition-colors px-2">Watchlist</a>
+        </div>
+      </div>
     </section>
   );
 }
