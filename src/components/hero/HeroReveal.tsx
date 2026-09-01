@@ -9,9 +9,11 @@ import {
 interface HeroRevealProps {
   name: string;
   tagline: string;
+  projectCount: number;
+  hackathonCount: number;
 }
 
-export function HeroReveal({ name, tagline }: HeroRevealProps) {
+export function HeroReveal({ name, tagline, projectCount, hackathonCount }: HeroRevealProps) {
   const nameWords = name.split(" ");
 
   return (
@@ -32,11 +34,11 @@ export function HeroReveal({ name, tagline }: HeroRevealProps) {
           </motion.div>
           <motion.div variants={heroWordVariant} className="flex gap-4 sm:gap-8">
             <div className="text-center">
-              <span className="block font-display text-2xl font-bold text-text-primary">14</span>
+              <span className="block font-display text-2xl font-bold text-text-primary">{projectCount}</span>
               <span className="text-xs uppercase tracking-wider text-text-muted">Projects</span>
             </div>
             <div className="text-center">
-              <span className="block font-display text-2xl font-bold text-text-primary">5</span>
+              <span className="block font-display text-2xl font-bold text-text-primary">{hackathonCount}</span>
               <span className="text-xs uppercase tracking-wider text-text-muted">Hackathons</span>
             </div>
           </motion.div>

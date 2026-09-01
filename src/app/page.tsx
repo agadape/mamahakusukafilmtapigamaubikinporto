@@ -7,12 +7,15 @@ export const revalidate = 60;
 
 export default async function HomePage() {
   const projects = await getProjects();
+  const hackathonCount = projects.filter(p => p.category === "hackathon").length;
 
   return (
     <main>
       <HeroReveal
         name="Agadape"
         tagline="Developer web-based information systems. Setiap project adalah entry dalam diary."
+        projectCount={projects.length}
+        hackathonCount={hackathonCount}
       />
       <FilmStripDivider />
       <div id="projects">
