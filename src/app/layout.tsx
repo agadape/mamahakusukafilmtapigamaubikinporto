@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { PageTransition } from "@/components/layout/PageTransition";
+import { Navbar } from "@/components/layout/Navbar";
 import "../styles/globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -25,7 +26,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body className="font-body antialiased">
+      <body className="font-body bg-base text-text-primary antialiased">
+        <Navbar />
         <PageTransition>{children}</PageTransition>
       </body>
     </html>

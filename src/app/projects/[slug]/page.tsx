@@ -9,50 +9,85 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
   if (!project) notFound();
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16">
-      <img
-        src={project.cover_url}
-        alt={project.title}
-        className="aspect-poster w-64 rounded-poster object-cover"
-      />
-
-      <h1 className="font-display mt-8 text-4xl font-bold">{project.title}</h1>
-
-      <div className="mt-2 flex items-center gap-4 text-sm text-text-muted">
-        <span>{project.year}</span>
-        <RatingDots rating={project.rating} />
+    <main className="min-h-screen pb-16">
+      {/* Cinematic Backdrop */}
+      <div className="relative h-[45vh] w-full lg:h-[55vh]">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-sm"
+          style={{ backgroundImage: `url(${project.cover_url})` }}
+        />
+        {/* Dark Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-base via-base/80 to-base/20" />
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
-        {project.tech_stack.map((tag) => (
-          <span
-            key={tag}
-            className="rounded-full border border-accent-blue px-3 py-1 text-xs text-accent-blue"
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="relative -mt-32 flex flex-col items-start gap-8 md:-mt-48 md:flex-row md:gap-12">
+          
+          {/* Poster Container */}
+          <div className="group relative w-48 shrink-0 md:w-64">
+            <div className="aspect-poster overflow-hidden rounded-poster bg-elevated shadow-2xl ring-1 ring-white/10">
+              <img
+                src={project.cover_url}
+                alt={project.title}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <div className="mt-4 flex justify-center">
+              <RatingDots rating={project.rating} />
+            </div>
+          </div>
 
-      <p className="mt-6 text-text-primary/90">{project.description}</p>
+          {/* Details Container */}
+          <div className="flex-1 pt-2 md:pt-16">
+            <div className="flex flex-wrap items-baseline gap-3">
+              <h1 className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+                {project.title}
+              </h1>
+              <span className="text-xl text-text-muted">{project.year}</span>
+            </div>
 
-      <div className="mt-8 flex gap-4">
-        {project.links?.demo && (
-          <a
-            href={project.links.demo}
-            className="rounded-full bg-accent-orange px-5 py-2 text-sm font-medium text-base"
-          >
-            Demo
-          </a>
-        )}
-        {project.links?.github && (
-          <a
-            href={project.links.github}
-            className="rounded-full border border-text-muted/40 px-5 py-2 text-sm text-text-primary"
-          >
-            GitHub
-          </a>
-        )}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {project.tech_stack.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded bg-elevated px-2 py-1 text-xs font-semibold tracking-wider text-accent-blue ring-1 ring-inset ring-accent-blue/30"
+                >
+                  {tag.toUpperCase()}
+                </span>
+              ))}
+              <span className="rounded bg-elevated px-2 py-1 text-xs font-semibold tracking-wider text-accent-orange ring-1 ring-inset ring-accent-orange/30">
+                {project.category.toUpperCase()}
+              </span>
+            </div>
+
+            <p className="mt-8 max-w-3xl text-lg leading-relaxed text-text-primary/90">
+              {project.description}
+            </p>
+
+            <div className="mt-10 flex gap-4">
+              {project.links?.demo && (
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded bg-accent-green px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-base transition-transform hover:scale-105"
+                >
+                  Live Demo
+                </a>
+              )}
+              {project.links?.github && (
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded bg-elevated px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-text-primary ring-1 ring-inset ring-white/20 transition-colors hover:bg-white/10"
+                >
+                  Source Code
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   );
