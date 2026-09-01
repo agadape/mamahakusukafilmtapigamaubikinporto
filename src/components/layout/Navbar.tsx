@@ -1,9 +1,6 @@
 import Link from "next/link";
 
 export function Navbar() {
-import Link from "next/link";
-
-export function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-[#14181c] px-4 py-3 border-b border-white/5 shadow-md">
       <div className="mx-auto flex max-w-5xl items-center justify-between">
@@ -37,5 +34,4 @@ export function Navbar() {
       </div>
     </header>
   );
-}
 }
