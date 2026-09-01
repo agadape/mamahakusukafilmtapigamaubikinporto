@@ -1,0 +1,12 @@
+:root {
+  --bg-base: #14181c;
+  --bg-elevated: #1c2228;
+  --accent-orange: #ff8000;
+  --accent-green: #00e054;
+  --accent-blue: #40bcf4;
+  --text-primary: #ffffff;
+  --text-muted: #93a1ab;
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
