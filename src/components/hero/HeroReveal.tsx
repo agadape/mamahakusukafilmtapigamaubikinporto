@@ -7,9 +7,15 @@ interface HeroRevealProps {
   tagline: string;
   projectCount: number;
   hackathonCount: number;
+  githubUser?: {
+    avatar_url: string;
+    followers: number;
+    location: string;
+    bio: string;
+  } | null;
 }
 
-export function HeroReveal({ name, tagline, projectCount, hackathonCount }: HeroRevealProps) {
+export function HeroReveal({ name, tagline, projectCount, hackathonCount, githubUser }: HeroRevealProps) {
   return (
     <section className="relative w-full pt-16 pb-8 px-4 overflow-hidden">
       <HeroBackgroundDots />
@@ -22,9 +28,13 @@ export function HeroReveal({ name, tagline, projectCount, hackathonCount }: Hero
           <div className="flex gap-4 sm:gap-6 items-start">
             {/* Avatar */}
             <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden border border-white/10 shrink-0 bg-elevated shadow-lg">
-              <div className="w-full h-full bg-gradient-to-tr from-accent-orange via-accent-green to-accent-blue flex items-center justify-center text-3xl sm:text-4xl font-display font-bold text-white">
-                {name.charAt(0)}
-              </div>
+              {githubUser?.avatar_url ? (
+                <img src={githubUser.avatar_url} alt={name} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-tr from-accent-orange via-accent-green to-accent-blue flex items-center justify-center text-3xl sm:text-4xl font-display font-bold text-white">
+                  {name.charAt(0)}
+                </div>
+              )}
             </div>
 
             {/* Info */}
@@ -38,12 +48,12 @@ export function HeroReveal({ name, tagline, projectCount, hackathonCount }: Hero
                   <span className="leading-none pb-2">...</span>
                 </button>
               </div>
-              <p className="mt-1 text-sm sm:text-base text-text-muted/80">{tagline}</p>
+              <p className="mt-1 text-sm sm:text-base text-text-muted/80">{githubUser?.bio || tagline}</p>
               <p className="mt-2 flex items-center gap-1 text-xs sm:text-sm text-text-muted/60">
                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path>
                 </svg>
-                Indonesia
+                {githubUser?.location || "Indonesia"}
               </p>
             </div>
           </div>
@@ -63,7 +73,7 @@ export function HeroReveal({ name, tagline, projectCount, hackathonCount }: Hero
               <span className="text-[9px] sm:text-[10px] text-text-muted/60 tracking-wider">THIS YEAR</span>
             </div>
             <div className="flex flex-col items-center pl-3 sm:pl-5 border-l border-white/10">
-              <span className="font-display text-xl sm:text-2xl font-bold text-white">0</span>
+              <span className="font-display text-xl sm:text-2xl font-bold text-white">{githubUser?.followers || 0}</span>
               <span className="text-[9px] sm:text-[10px] text-text-muted/60 tracking-wider">FOLLOWERS</span>
             </div>
           </div>
