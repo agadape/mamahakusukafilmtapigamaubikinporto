@@ -57,8 +57,8 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
               </span>
             </div>
 
-            {/* Letterboxd Review Block */}
-            <div className="mt-8 rounded-lg border border-white/5 bg-elevated/40 p-6 shadow-inner">
+            {/* Kotak Review (Letterboxd Style) - Kontras Tinggi */}
+            <div className="mt-8 rounded-lg border border-white/10 bg-[#14181c]/95 backdrop-blur-xl p-6 shadow-2xl relative z-20">
               <div className="mb-4 flex items-center gap-3 border-b border-white/5 pb-4">
                 <div className="h-8 w-8 shrink-0 overflow-hidden rounded-full bg-gradient-to-tr from-accent-orange to-accent-green">
                   <span className="flex h-full w-full items-center justify-center font-display text-sm font-bold text-base">
