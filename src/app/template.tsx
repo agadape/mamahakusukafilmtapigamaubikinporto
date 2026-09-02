@@ -9,20 +9,26 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <motion.div
         initial={{ scaleX: 1 }}
         animate={{ scaleX: 0 }}
-        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: 0.15 }}
+        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: 0.225 }}
         className="fixed inset-0 z-[100] bg-accent-orange origin-right pointer-events-none"
       />
       <motion.div
         initial={{ scaleX: 1 }}
         animate={{ scaleX: 0 }}
-        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: 0.075 }}
+        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: 0.15 }}
         className="fixed inset-0 z-[101] bg-accent-green origin-right pointer-events-none"
       />
       <motion.div
         initial={{ scaleX: 1 }}
         animate={{ scaleX: 0 }}
+        transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1], delay: 0.075 }}
+        className="fixed inset-0 z-[102] bg-accent-blue origin-right pointer-events-none"
+      />
+      <motion.div
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0 }}
         transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
-        className="fixed inset-0 z-[102] bg-[#14181c] origin-right pointer-events-none flex items-center justify-center"
+        className="fixed inset-0 z-[103] bg-[#14181c] origin-right pointer-events-none flex items-center justify-center"
       >
         <span className="flex gap-2">
           <span className="h-4 w-4 rounded-full bg-accent-orange"></span>
@@ -35,7 +41,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <motion.div
         initial={{ clipPath: "inset(0 100% 0 0)" }}
         animate={{ clipPath: "inset(0 0% 0 0)" }}
-        transition={{ duration: 0.7, ease: [0.65, 0, 0.35, 1], delay: 0.2 }}
+        transition={{ duration: 0.7, ease: [0.65, 0, 0.35, 1], delay: 0.275 }}
       >
         {children}
       </motion.div>
