@@ -8,6 +8,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Teks terlalu pendek" }, { status: 400 });
     }
 
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return NextResponse.json({ error: "Gemini API Key belum di-setting di Vercel" }, { status: 500 });
+    }
+
     const prompt = `
     You are a strict data-structuring engine. Convert a raw, informal project update into JSON.
     Return ONLY a raw JSON object, no markdown formatting, no backticks, no preamble.
