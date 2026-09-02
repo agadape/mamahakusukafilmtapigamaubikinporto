@@ -13,6 +13,9 @@ export interface Project {
   category: ProjectCategory;
   rating: number | null;
   year: number;
+  entry_type?: "project" | "experience" | "certificate";
+  company_or_issuer?: string | null;
+  date_range?: string | null;
   links: { demo?: string; github?: string } | null;
   is_published: boolean;
   created_at: string;

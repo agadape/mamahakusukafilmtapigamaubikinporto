@@ -14,15 +14,20 @@ export async function POST(req: Request) {
     }
 
     const prompt = `
-    You are a strict data-structuring engine. Convert a raw, informal project update into JSON.
+    You are a strict data-structuring engine. Convert a raw, informal update (originally a LinkedIn post) into JSON.
+    First, determine if the update is about a software PROJECT, a work/org EXPERIENCE, or a CERTIFICATE/credential.
+
     Return ONLY a raw JSON object, no markdown formatting, no backticks, no preamble.
 
     Expected JSON schema:
     {
-      "title": "String (max 60 chars)",
-      "description": "String (1-3 sentences)",
-      "tech_stack": ["Array", "of", "strings"],
-      "rating": Integer (Must be a whole number between 1 and 5)
+      "entry_type": "project" | "experience" | "certificate",
+      "title": "String (Project name, Job title, or Certificate name. Max 60 chars)",
+      "company_or_issuer": "String (Company name or Certificate Issuer like AWS/Coursera. Empty if it's just a personal project)",
+      "description": "String (1-3 sentences, third-person or neutral)",
+      "tech_stack": ["Array", "of", "skills/tech mentioned"],
+      "date_range": "String (e.g., '2023 - Present', 'July 2026', or '2026')",
+      "rating": Integer (1 to 5 for project effort. Use null if entry_type is experience or certificate)
     }
     
     Raw update:

@@ -52,8 +52,11 @@ export default function SmartLogPage() {
         description: aiData.description,
         tech_stack: aiData.tech_stack || [],
         rating: aiData.rating ? Math.round(Number(aiData.rating)) : null,
-        category: "personal", // Default category
+        category: "personal", // Default fallback, bisa diganti nanti
         year: new Date().getFullYear(),
+        entry_type: aiData.entry_type || "project",
+        company_or_issuer: aiData.company_or_issuer || null,
+        date_range: aiData.date_range || null,
         cover_url: coverUrl,
         source_raw_text: rawText,
         source_type: "smart_log",

@@ -110,9 +110,18 @@ export function PosterCard({ project }: PosterCardProps) {
               </span>
             ))}
           </div>
-          <div className="mt-1 flex items-center justify-between">
-            <span className="text-xs font-bold tracking-wider text-text-muted drop-shadow-md">{project.year}</span>
-            <RatingDots rating={project.rating} />
+          <div className="mt-1 flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-xs font-bold tracking-wider text-text-muted drop-shadow-md">
+              {project.date_range || project.year}
+            </span>
+            
+            {project.entry_type === "experience" || project.entry_type === "certificate" ? (
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white/50">
+                {project.company_or_issuer || project.entry_type}
+              </span>
+            ) : (
+              <RatingDots rating={project.rating} />
+            )}
           </div>
         </motion.div>
       </motion.div>
