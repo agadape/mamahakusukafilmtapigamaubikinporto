@@ -67,14 +67,14 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
                 </div>
                 <div>
                   <p className="text-sm font-medium text-text-muted">
-                    Review by <strong className="text-text-primary">Agadape</strong>
+                    Review by <strong className="text-white">Agadape</strong>
                   </p>
                   <div className="mt-0.5">
                     <RatingDots rating={project.rating} />
                   </div>
                 </div>
               </div>
-              <p className="whitespace-pre-line text-base leading-relaxed text-text-primary/90">
+              <p className="whitespace-pre-line text-base leading-relaxed text-white/90">
                 {project.description}
               </p>
             </div>
