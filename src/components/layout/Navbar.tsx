@@ -24,7 +24,7 @@ export function Navbar() {
           </nav>
           
           <Link 
-            href="/admin/dashboard" 
+            href="/admin/smart-log" 
             className="flex items-center rounded bg-accent-green px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-base hover:bg-accent-green/90 transition-colors shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]"
           >
             <span className="mr-1 font-bold text-sm leading-none">+</span> Log
