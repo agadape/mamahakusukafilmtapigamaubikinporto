@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       "title": "String (max 60 chars)",
       "description": "String (1-3 sentences)",
       "tech_stack": ["Array", "of", "strings"],
-      "rating": Number (1.0 to 5.0)
+      "rating": Integer (Must be a whole number between 1 and 5)
     }
     
     Raw update:

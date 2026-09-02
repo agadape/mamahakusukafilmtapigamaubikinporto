@@ -52,7 +52,7 @@ export default function SmartLogPage() {
         slug: slugify(aiData.title),
         description: aiData.description,
         tech_stack: aiData.tech_stack || [],
-        rating: aiData.rating || null,
+        rating: aiData.rating ? Math.round(Number(aiData.rating)) : null,
         category: "personal", // Default category
         year: new Date().getFullYear(),
         cover_url: coverUrl,
