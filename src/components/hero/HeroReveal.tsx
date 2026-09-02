@@ -95,23 +95,24 @@ export function HeroReveal({ name, tagline, projectCount, hackathonCount, github
 }
 
 // Dots melayang perlahan, 3 warna aksen — dimatikan otomatis via CSS reduced-motion (globals.css)
-function HeroBackgroundDots() {
+export function HeroBackgroundDots() {
   const colors = ["var(--accent-orange)", "var(--accent-green)", "var(--accent-blue)"];
-  const dots = Array.from({ length: 18 });
+  const dots = Array.from({ length: 36 });
 
   return (
-    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {dots.map((_, i) => {
         const color = colors[i % colors.length];
         const size = 4 + (i % 3) * 2;
-        const left = (i * 37) % 100;
-        const top = (i * 53) % 100;
-        const duration = 6 + (i % 5);
+        const left = (i * 23) % 100;
+        const top = (i * 17) % 100;
+        const duration = 8 + (i % 5);
+        const delay = (i % 3) * 2;
 
         return (
           <motion.span
             key={i}
-            className="absolute rounded-full opacity-40"
+            className="absolute rounded-full opacity-30"
             style={{
               backgroundColor: color,
               width: size,
@@ -120,11 +121,12 @@ function HeroBackgroundDots() {
               top: `${top}%`,
             }}
             animate={{
-              y: [0, -20, 0],
-              x: [0, 10, 0],
+              y: [0, -30, 0],
+              x: [0, 15, 0],
             }}
             transition={{
               duration,
+              delay,
               repeat: Infinity,
               ease: "easeInOut",
             }}
