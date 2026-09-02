@@ -82,7 +82,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
             <div className="mt-10 flex gap-4">
               {project.links?.demo && (
                 <a
-                  href={project.links.demo}
+                  href={project.links.demo.startsWith("http") ? project.links.demo : `https://${project.links.demo}`}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded bg-accent-green px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-base transition-transform hover:scale-105"
@@ -92,7 +92,7 @@ export default async function ProjectDetailPage({ params }: { params: { slug: st
               )}
               {project.links?.github && (
                 <a
-                  href={project.links.github}
+                  href={project.links.github.startsWith("http") ? project.links.github : `https://${project.links.github}`}
                   target="_blank"
                   rel="noreferrer"
                   className="rounded bg-elevated px-6 py-2.5 text-sm font-bold uppercase tracking-wider text-text-primary ring-1 ring-inset ring-white/20 transition-colors hover:bg-white/10"
