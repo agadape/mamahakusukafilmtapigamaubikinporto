@@ -40,7 +40,12 @@ export function HeroReveal({ name, tagline, projectCount, hackathonCount, github
             {/* Info */}
             <div className="flex flex-col pt-1">
               <div className="flex items-center gap-3">
-                <h1 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight">{name}</h1>
+                <h1 className="font-display text-2xl sm:text-3xl font-bold text-white tracking-tight flex items-center gap-2">
+                  {name}
+                  <span className="rounded bg-gradient-to-tr from-accent-orange via-accent-green to-accent-blue px-1.5 py-0.5 text-[9px] font-black tracking-widest text-base shadow-[0_0_12px_rgba(0,224,84,0.4)]">
+                    PRO
+                  </span>
+                </h1>
                 <button className="hidden sm:block px-3 py-1 text-[11px] font-semibold tracking-widest text-text-muted bg-white/10 rounded hover:bg-white/20 transition-colors uppercase">
                   Edit Profile
                 </button>
