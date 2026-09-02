@@ -42,9 +42,8 @@ export default function SmartLogPage() {
 
       // 2. Generate Cover URL dari API Poster kita
       const techQuery = aiData.tech_stack?.join(",") || "";
-      // Gunakan URL absolute Vercel jika nanti di-deploy, untuk sekarang pakai origin
-      const baseUrl = window.location.origin;
-      const coverUrl = `${baseUrl}/api/generate-poster?title=${encodeURIComponent(aiData.title)}&tech=${encodeURIComponent(techQuery)}`;
+      // Gunakan URL relatif agar bisa jalan di localhost maupun production Vercel
+      const coverUrl = `/api/generate-poster?title=${encodeURIComponent(aiData.title)}&tech=${encodeURIComponent(techQuery)}`;
 
       // 3. Simpan ke database
       const { error } = await supabase.from("projects").insert({

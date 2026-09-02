@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
-import { PageTransition } from "@/components/layout/PageTransition";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import "../styles/globals.css";
@@ -30,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-body flex min-h-screen flex-col bg-base text-text-primary antialiased">
         <Navbar />
         <div className="flex-1">
-          <PageTransition>{children}</PageTransition>
+          {children}
         </div>
         <Footer />
       </body>
